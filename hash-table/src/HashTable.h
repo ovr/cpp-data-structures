@@ -16,9 +16,9 @@ protected:
     unsigned int capacity;
     unsigned int count;
 
-    void *first = nullptr;
+    Bucket<Value> *first = nullptr;
 
-    void *last = nullptr;
+    Bucket<Value> *last = nullptr;
 
     int hash(std::string key) {
         int value = 0;
@@ -31,7 +31,7 @@ protected:
     }
 
     ~HashTable() {
-        
+
     }
 public:
     void insert(const std::string key, const Value &value) {
@@ -44,7 +44,7 @@ public:
         }
 
         if (this->last) {
-            auto *last = (Bucket<Value>*)this->last;
+            auto *last = this->last;
             last->next = bucket;
         }
 
@@ -59,7 +59,7 @@ public:
         }
 
         if (this->last) {
-            auto *last = (Bucket<Value>*)this->last;
+            auto *last = this->last;
             last->next = bucket;
         }
 
@@ -71,12 +71,12 @@ public:
 
     void printTable() {
         if (this->count > 0) {
-            auto *bucket = (Bucket<int>*)this->first;
+            auto *bucket = this->first;
 
             while (bucket) {
                 std::cout << "key: " << bucket->key << " value: " << *bucket->value << std::endl;
 
-                bucket = (Bucket<int>*)bucket->next;
+                bucket = bucket->next;
             }
         }
     }
