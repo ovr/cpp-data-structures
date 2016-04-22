@@ -11,7 +11,7 @@ template<typename Value>
 struct Bucket {
     std::string key;
     Value *value;
-    Bucket *next;
+    Bucket<Value> *next;
 };
 
 #endif //HASH_TABLE_BUCKET_H
