@@ -6,23 +6,16 @@ using namespace std;
 int main() {
     cout << "Hello, World!" << endl;
 
-    auto *ht = new HashTable();
+    auto *ht = new HashTable<int>();
 
     auto *bucket1 = new Bucket<int>;
     bucket1->key = "key1";
-    bucket1->value = new int(5);
+    bucket1->value = new int(1);
 
-    ht->insert(
-        bucket1
-    );
+    ht->printTable();
 
-    auto *bucket2 = new Bucket<int>;
-    bucket2->key = "key2";
-    bucket2->value = new int(6);
-
-    ht->insert(
-            bucket2
-    );
+    ht->insert("key2", 2);
+    ht->insert("key3", 3);
 
     ht->printTable();
 

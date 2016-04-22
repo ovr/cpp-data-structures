@@ -7,8 +7,10 @@
 
 
 #include <string>
+#include <iostream>
 #include "Bucket.h"
 
+template <typename Value>
 class HashTable {
 protected:
     unsigned int capacity;
@@ -18,13 +20,66 @@ protected:
 
     void *last = nullptr;
 
-    int hash(std::string key);
+    int hash(std::string key) {
+        int value = 0;
 
-    ~HashTable();
+        for (int i = 0; i < key.length(); i++) {
+            value += key[i];
+        }
+
+        return value % capacity;
+    }
+
+    ~HashTable() {
+        
+    }
 public:
-    void insert(Bucket<int> *bucket);
+    void insert(const std::string key, const Value &value) {
+        auto *bucket = new Bucket<Value>;
+        bucket->key = key;
+        bucket->value = new Value(value);
 
-    void printTable();
+        if (!this->first) {
+            this->first = bucket;
+        }
+
+        if (this->last) {
+            auto *last = (Bucket<Value>*)this->last;
+            last->next = bucket;
+        }
+
+        this->last = bucket;
+
+        this->count++;
+    }
+
+    void insertBucket(Bucket<Value> *bucket) {
+        if (!this->first) {
+            this->first = bucket;
+        }
+
+        if (this->last) {
+            auto *last = (Bucket<Value>*)this->last;
+            last->next = bucket;
+        }
+
+        this->last = bucket;
+
+        this->count++;
+    }
+
+
+    void printTable() {
+        if (this->count > 0) {
+            auto *bucket = (Bucket<int>*)this->first;
+
+            while (bucket) {
+                std::cout << "key: " << bucket->key << " value: " << *bucket->value << std::endl;
+
+                bucket = (Bucket<int>*)bucket->next;
+            }
+        }
+    }
 };
 
 
