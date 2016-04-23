@@ -13,7 +13,7 @@ int main() {
     bucket1->value = new int(1);
 
     ht->insertBucket(bucket1);
-    
+
     ht->insert("key2", 2);
     ht->insert("key3", 3);
 

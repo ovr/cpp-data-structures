@@ -39,18 +39,7 @@ public:
         bucket->key = key;
         bucket->value = new Value(value);
 
-        if (!this->first) {
-            this->first = bucket;
-        }
-
-        if (this->last) {
-            auto *last = this->last;
-            last->next = bucket;
-        }
-
-        this->last = bucket;
-
-        this->count++;
+        this->insertBucket(bucket);
     }
 
     void insertBucket(Bucket<Value> *bucket) {
