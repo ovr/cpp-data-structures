@@ -10,7 +10,7 @@
 #include <iostream>
 #include "Bucket.h"
 
-template <typename Value>
+template <typename Key, typename Value>
 class HashTable {
 protected:
     unsigned int capacity;
@@ -34,7 +34,7 @@ protected:
 
     }
 public:
-    void insert(const std::string key, const Value &value) {
+    void insert(const Key key, const Value &value) {
         auto *bucket = new Bucket<Value>;
         bucket->key = key;
         bucket->value = new Value(value);
